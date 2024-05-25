@@ -1,39 +1,81 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#define endofstring '\0'
-char userinput[12]
+char autoPopulate = 0;
 
-void inputInteger (int *number) // check if input is correct and then convert to int
+int CheckInputMax ( int max) // checks if number is 
 {
-    do 
+    int input;
+	scanf("%d",&input);
+
+	while (input > max || input < 1){
+		printf("\nnumber has to be less than %d\n",max);
+		scanf("%d",&input);
+	}
+    return input;
+}
+
+void populateMatrix( int (*matrix)[100], int r, int c)
+{
+    int i,j;
+    for (i=0; i<r; ++i)
     {
-        int i,j;
-        printf ("\nenter integer: ");
-        scanf("%s", userinput);
-        gets(line);
-        for(i=0; userinput[i] !=endofstring; ++i)
-        {   
-            while(!((userinput[i] >= '0' && userinput[i] <= '9') || userinput[i] == endofstring))
+        for(j=0; j<c; ++j)
+        {
+            if(autoPopulate)
             {
-                for(j=i; userinput[j]!= endofstring; ++j)
+                matrix[i][j]=rand() % (r + 1 - 1) + c;
+                printf("%d ", matrix[i][j]);
+                if(j==c-1)
                 {
-                    userinput[j] = userinput[j+1];
+                    printf("\n");
                 }
-                userinput[j] = endofstring;
+            } else
+            {
+            printf("enter element a[%d][%d]: ", i+1, j+1);
+            scanf("%d", matrix[i][j]);
+            // program just exits after 1 element on windows
             }
         }
-        printf("%s", userinput);
-
     }
-    while (!(*number  > 0 && *number <= 100));
 }
 
 int main ()
 {
     int r,c, a[100][100], b[100][100], sum[100][100], i, j;
-    printf ("enter number of strings from 1 to 100.");
-    inputInteger(&r);
-    printf("\n%d",r);
-    printf("enter number to columns: ");
-    scanf("%d", &c);
+    printf ("Enter number of strings from 1 to 100: ");
+    r = CheckInputMax (100);
+    printf("Enter number to columns: ");
+    c = CheckInputMax (100);
+    // check matrix size, if its too big, then auto populate
+    if (r > 6 || c > 6)
+        autoPopulate = 1;
+    printf("\nPopulating the first matrix:\n");
+    populateMatrix( a, r, c);
+    printf("\nPopulating the second matrix:\n");
+    populateMatrix(b, r, c);
+
+    // addition of matrix
+    for (i=0; i<r; ++i)
+        for (j=0; j<c;++j)
+        {
+            sum[i][j]=a[i][j] + b[i][j];
+        }
+    // output result
+    printf("\nsum of 2 matrixes is: \n");
+    for(i=0; i<r; ++i)
+        for(j=0; j<c; ++j)
+        {
+            printf("%d ", sum[i][j]);
+            if(j==c-1)
+            {
+                printf("\n");
+            }
+        }
 }
+/*
+в упражнении нужно было просто сложить 2 матрицы.
+что я добавил от себя - проверка на слишком большую или маленькую матрицу,
+                      - автозаполенение матрицы (если строк или столбцов больше 6, для экономии времени)
+                      - ввод элементов матриц в отдельной функции, для сокращения повторяющегося кода
+*/
