@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 char autoPopulate = 0;
 
 int CheckInputMax ( int max) // checks if number is 
@@ -72,6 +71,7 @@ int main ()
                 printf("\n");
             }
         }
+    return 0;
 }
 /*
 в упражнении нужно было просто сложить 2 матрицы.
