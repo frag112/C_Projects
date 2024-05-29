@@ -15,7 +15,7 @@ int main()
     {
         flag = checkPrimeNumber(i);
         if (flag == 1)
-            printf ("%d", i);
+            printf ("%d ", i);
     }
     separator();
     return 0;
