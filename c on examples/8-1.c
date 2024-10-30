@@ -1,10 +1,8 @@
 #include <stdio.h>
-<<<<<<< HEAD
-=======
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
->>>>>>> origin/main
+
 
 #define MAX 10
 
@@ -12,13 +10,6 @@ char *p[MAX];
 int in_pos;
 int out_pos;
 
-<<<<<<< HEAD
-
-
-int main ()
-{
-    return 0;
-=======
 void queueIn (char *q)
 {
     if (in_pos == MAX)
@@ -92,5 +83,4 @@ int main()
             case 'Q': return 0;
         }
     }
->>>>>>> origin/main
 }
