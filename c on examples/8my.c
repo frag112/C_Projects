@@ -25,10 +25,24 @@ void delQ()
 }
 void new_el()
 {
-    char s[100];
-    scanf("%s", s);
-    printf("%s", s);
-    addQ(s);
+    char s[100], *p;
+    //scanf("%s", s);
+
+    do {
+        printf("Введите строку для вставки в очередь: \n");
+        if(fgets(s, sizeof s, stdin) != NULL)
+        {
+            p = (char *) malloc (strlen(s)+1);
+            if (!p)
+            {
+                printf("Нет памяти!\n");
+                return;            
+            }
+        strcpy(p, s);
+        if(*s) queueIn(p);
+        }
+    } while (*s);
+    //addQ(s);
 }
 void display()
 {
