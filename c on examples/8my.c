@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -26,23 +27,18 @@ void delQ()
 void new_el()
 {
     char s[100], *p;
-    //scanf("%s", s);
-
-    do {
-        printf("Введите строку для вставки в очередь: \n");
-        if(fgets(s, sizeof s, stdin) != NULL)
+    printf("Enter sting to queue: \n");
+    if(fgets(s, sizeof s, stdin) != NULL)
+    {
+        p = (char *) malloc (strlen(s)+1);
+        if (!p)
         {
-            p = (char *) malloc (strlen(s)+1);
-            if (!p)
-            {
-                printf("Нет памяти!\n");
-                return;            
-            }
-        strcpy(p, s);
-        if(*s) queueIn(p);
+            printf("Нет памяти!\n");
+            return;            
         }
-    } while (*s);
-    //addQ(s);
+    strcpy(p, s);
+    if(*s) addQ(p);
+    }
 }
 void display()
 {
